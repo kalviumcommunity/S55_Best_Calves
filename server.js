@@ -1,32 +1,10 @@
 const express = require('express');
 const app = express();
-require('dotenv').config();
-const mongoose = require('mongoose');
+const app_routes = require('./routes')
 
-let connectionStatus = 'disconnected';
+const{startDatabase} = require('./db')
 
-const startDatabase = async () => {
-    try {
-        await mongoose.connect(process.env.MONGO_URI);
-        connectionStatus = "The database has been connected";
-    } catch (err) {
-        console.error("Failed to connect to database");
-        connectionStatus = "error";
-    }
-};
-
-const stopDatabase = async () => {
-    await mongoose.disconnect();
-    connectionStatus = "closed";
-};
-
-app.get('/', (req, res) => {
-    res.send(connectionStatus);
-});
-
-app.get("/ping", (req, res) => {
-    res.send('Hello');
-});
+app.use('/', app_routes);
 
 app.listen(3000, () => {
     startDatabase();
