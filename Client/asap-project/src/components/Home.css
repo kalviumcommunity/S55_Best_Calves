@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Halant:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+nav{
+  font-family: 'Halant', serif;
+  background-image: url("https://kalvium.community/images/livebooks_grid_tablet.svg");
+  background-color: rgb(66,54,83);
+  background-position: center;
+  background-repeat: repeat;
+  background-size: cover;
+  padding: 35px 2vw;
+  width: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  box-shadow: 0 5px 8px 0 rgb(138, 137, 134);
+}
+
+img{
+  width: 250px; 
+  height: auto; 
+}
+
+.input{
+  font-family: 'DM Serif Display', serif;
+  background-color: rgb(255, 255, 255);
+  flex-grow: 1; 
+  width: 93vw;
+  height: 45px; 
+  margin: 0 10px;
+  padding: 10px; 
+  border-radius: 7px;
+  font-size: 16px; 
+  border: none;
+  box-shadow: 0 6px 8px 0 rgb(37, 1, 53);
+}
+
+.main{
+    font-family: 'DM Serif Display', serif;
+    background-color: rgb(254, 240, 214);
+    background-position: center;
+    background-repeat: no-repeat; 
+    background-size: cover; 
+    min-height: 88vh; 
+    width: 100%; 
+}
+
+.flex{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.container{
+    width: auto;
+    padding-block: 120px;
+    padding-inline: 1.2vw;
+    overflow: hidden;
+    row-gap: 3vw;
+    column-gap: 3vw;
+}
+
+.card{
+    background-color: rgb(254,254,246);
+    background-image: url("https://kalvium.community/images/launcher-hero-bg.svg");
+    object-fit: cover;
+    background-position: center;
+    background-repeat: repeat;
+    background-size: cover;
+    width: 260px;
+    min-height: 400px;
+    padding-bottom: 15px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgb(47, 47, 47);
+}
+
+.card:hover{
+    box-shadow: 1px 1px 8px #474747;
+    background-color: rgb(255, 238, 207);
+    transform: translateY(-4px);
+}
+
+.card-image{
+    padding: 2vh;
+}
+
+.card-image img{
+    border-radius: 10px;
+    width: 100%;
+    height: 40vh;
+    object-fit: cover;
+}
+
+.card-text{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 12px;
+    text-align: start;
+}
+
+.details{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.height{
+    margin-top: -10px;
+    color: rgb(76, 76, 76);
+}
+
+.age h5{
+    color: rgb(76, 76, 76);
+}
+
+h3{
+    font-size: 1rem;
+    text-wrap: wrap;
+    padding-bottom: 1.9vh;
+}
+
