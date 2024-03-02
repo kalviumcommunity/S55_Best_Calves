@@ -7,5 +7,8 @@ Calf Kings is a catalog dedicated to showcasing footballers with the most impres
 - Browse and Search: Users can easily browse through the catalog or search for specific footballers.
 - Responsive Design: The platform is optimized for various devices, ensuring a seamless experience across desktop and mobile.
 
-# Deployed link: 
+# Backend Deployed link: 
 https://calf-kings.onrender.com/
+
+# Frontend Deployed link: 
+https://calf-kings.vercel.app/
