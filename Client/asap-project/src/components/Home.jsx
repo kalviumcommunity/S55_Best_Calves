@@ -1,23 +1,30 @@
 import React from "react";
-import './Home.css'
+import './Home.css';
+import logo from '../assets/logo.png'
 
 function Home() {
   return (
     <div className="main">
       <nav>
         <div>
+          <img className="logo" src={logo} alt="" /> 
+        </div>
+        <div>
           <input
             className="input"
             type="text"
-            placeholder="🔍    Search Players"
+            placeholder="       Search Players"
           />
+        </div>
+        <div>
+          <a href="">About</a>
         </div>
       </nav>
 
       <div className="container flex">
           <div className="card">
             <div className="card-image">
-              <img src="./react.svg"/>
+              <img src="https://static.independent.co.uk/2021/08/09/12/2017481b2505454187ce12a4cc9c79a9Y29udGVudHNlYXJjaGFwaSwxNjI4NTkzMzk4-2.60020419.jpg?quality=75&width=1200&auto=webp"/>
             </div>
             <div className="card-text">
                 <div className="details">
