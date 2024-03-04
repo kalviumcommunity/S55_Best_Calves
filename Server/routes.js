@@ -1,7 +1,9 @@
 const express = require('express');
 const app = express.Router()
 const {getConnectionStatus}=require('./db')
+const {Model} = require('./schema')
 
+app.use(express.json());
 
 app.get('/', async (req, res) => {
     const connectionStatus = await getConnectionStatus()
@@ -43,5 +45,14 @@ app.delete("/delete", (req, res, next) => {
         next(error);
     }
 });
+
+app.get('/players',async(req,res)=>{
+    try{
+        const test = await Model.find()
+        res.json(test)
+    }catch(err){
+        console.log(err)
+    }
+})
 
 module.exports = app

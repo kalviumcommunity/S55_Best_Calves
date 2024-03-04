@@ -1,8 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import './Home.css';
-import logo from '../assets/logo.png'
+import logo from '../assets/logo.png';
+import axios from 'axios';
 
 function Home() {
+  const [players, setPlayers] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://calf-kings.onrender.com/players');
+        setPlayers(response.data);
+      } catch (error) {
+        console.error('Error fetching players:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div className="main">
       <nav>
@@ -22,32 +38,31 @@ function Home() {
       </nav>
 
       <div className="container flex">
-          <div className="card">
+        {players.map(player => (
+          <div className="card" key={player.name}>
             <div className="card-image">
-              <img src="https://static.independent.co.uk/2021/08/09/12/2017481b2505454187ce12a4cc9c79a9Y29udGVudHNlYXJjaGFwaSwxNjI4NTkzMzk4-2.60020419.jpg?quality=75&width=1200&auto=webp"/>
+              <img src={player.img_url} alt={player.name} />
             </div>
             <div className="card-text">
-                <div className="details">
-                    <div className="name">
-                        <h3>Sergio Aguero</h3>
-                        <h5 className="height">169 cms</h5>
-                    </div>
-                    <div className="age">
-                        <h4>23 yrs</h4>
-                    </div>
+              <div className="details">
+                <div className="name">
+                  <h3>{player.name}</h3>
+                  <h5 className="height">{player.height}</h5>
                 </div>
-                
-                <br />
-
-                <div>
-                    <h3>Calf Ratings: 9</h3>
+                <div className="age">
+                  <h4>{player.age} yrs</h4>
                 </div>
+              </div>
+              <br />
+              <div>
+                <h3>Calf Rating: {player.calf_ratings}</h3>
+              </div>
             </div>
           </div>
+        ))}
       </div>
     </div>
   );
 }
 
 export default Home;
-
