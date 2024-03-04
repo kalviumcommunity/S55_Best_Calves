@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const testSchema = mongoose.Schema({
+const userSchema = mongoose.Schema({
     name: String,
     age: Number,
     calf_ratings: Number,
@@ -8,5 +8,5 @@ const testSchema = mongoose.Schema({
     height: String,
     img_url: String
 });
-const Model = mongoose.model("calfkings-collections", testSchema);
-module.exports = {Model};
+const userModel = mongoose.model("calfkings-collections", userSchema);
+module.exports = {userModel};
