@@ -19,7 +19,7 @@ nav{
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  box-shadow: 0 5px 8px 0 rgb(138, 137, 134);
+  box-shadow: 0 10px 14px 0 rgb(82, 94, 99);
 }
 
 a{
@@ -51,7 +51,7 @@ img {
 .main{
     font-family: 'DM Serif Display', serif;
     background-image: url("../assets/CampNou.jpg");
-    background-position: center;
+    background-position: top;
     background-repeat: no-repeat; 
     background-size: cover; 
     min-height: 88vh; 

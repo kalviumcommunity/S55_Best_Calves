@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express.Router()
 const {getConnectionStatus}=require('./db')
-const {Model} = require('./schema')
+const {userModel} = require('./schema')
 
 app.use(express.json());
 
@@ -49,7 +49,7 @@ app.delete("/delete", (req, res, next) => {
 
 app.get('/players',async(req,res)=>{
     try{
-        const test = await Model.find()
+        const test = await userModel.find()
         res.json(test)
     }catch(err){
         console.log(err)
