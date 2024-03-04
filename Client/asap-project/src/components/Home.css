@@ -9,12 +9,11 @@
 
 nav{
   font-family: 'Halant', serif;
-  background-image: url("https://kalvium.community/images/livebooks_grid_tablet.svg");
-  background-color: rgb(66,54,83);
-  background-position: center;
+  background-image: url("../assets/nav.jpg"); 
+  background-position: top;
   background-repeat: repeat;
   background-size: cover;
-  padding: 35px 2vw;
+  padding: 20px 2vw;
   width: auto;
   display: flex;
   justify-content: space-between;
@@ -23,16 +22,23 @@ nav{
   box-shadow: 0 5px 8px 0 rgb(138, 137, 134);
 }
 
-img{
-  width: 250px; 
-  height: auto; 
+a{
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #04527A;
+  text-decoration: none;
+}
+
+img {
+  width: 160px; 
+  height: 40px; 
 }
 
 .input{
   font-family: 'DM Serif Display', serif;
   background-color: rgb(255, 255, 255);
   flex-grow: 1; 
-  width: 93vw;
+  width: 43vw;
   height: 45px; 
   margin: 0 10px;
   padding: 10px; 
@@ -44,7 +50,7 @@ img{
 
 .main{
     font-family: 'DM Serif Display', serif;
-    background-color: rgb(254, 240, 214);
+    background-image: url("../assets/CampNou.jpg");
     background-position: center;
     background-repeat: no-repeat; 
     background-size: cover; 
