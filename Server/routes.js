@@ -47,10 +47,6 @@ app.delete("/delete", (req, res, next) => {
 });
 
 
-const cors = require('cors');
-
-app.use('/players', cors({ origin: 'https://calf-kings.onrender.com/players' }));
-
 app.get('/players',async(req,res)=>{
     try{
         const test = await Model.find()
