@@ -3,7 +3,6 @@ const app = express();
 const app_routes = require('./routes')
 
 const{startDatabase} = require('./db')
-
 app.use('/', app_routes);
 
 app.listen(3000, () => {
