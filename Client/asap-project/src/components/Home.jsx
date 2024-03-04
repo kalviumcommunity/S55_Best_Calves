@@ -12,7 +12,7 @@ function Home() {
         const response = await axios.get('https://calf-kings.onrender.com/players');
         setPlayers(response.data);
       } catch (error) {
-        console.error('Error fetching players:', error);
+        console.error(error);
       }
     };
 
