@@ -5,7 +5,7 @@ const {Model} = require('./schema')
 
 app.use(express.json());
 
-app.get('/', async (req, res) => {
+app.get('/',  async (req, res) => {
     const connectionStatus = await getConnectionStatus()
     res.send(connectionStatus)
  });
@@ -46,10 +46,6 @@ app.delete("/delete", (req, res, next) => {
     }
 });
 
-
-const cors = require('cors');
-
-app.use('/players', cors({ origin: 'https://calf-kings.onrender.com/players' }));
 
 app.get('/players',async(req,res)=>{
     try{
