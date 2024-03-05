@@ -1,0 +1,104 @@
+body {
+    background-color: rgb(255, 236, 201);
+    background-image: url("../assets/CampNou.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 88vh;
+    width: 100%;
+  }
+  
+  .form-container {
+    font-family: 'DM Serif Display', serif;
+    background-color: rgb(254, 254, 246);
+    background-image: url("https://kalvium.community/images/launcher-hero-bg.svg");
+    object-fit: cover;
+    background-position: start;
+    background-repeat: repeat;
+    background-size: cover;
+    width: 80%;
+    max-width: 500px;
+    margin-inline: auto;
+    margin-top: 12vh;
+    padding-block: 60px;
+    padding-inline: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0 20px 30px 0 rgb(0, 0, 0);
+  }
+  
+  .text {
+    position: relative;
+    margin-top: -30px;
+    margin-bottom: 20px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  label {
+    width: 100%;
+    margin-top: 10px;
+    color: rgb(63, 63, 63);
+    font-weight: bold;
+  }
+  
+  input,
+  .button {
+    width: calc(100% - 16px);
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(228, 228, 228);
+    color: rgb(63, 63, 63);
+  }
+  
+  .button {
+    font-family: 'DM Serif Display', serif;
+    margin-top: 1rem;
+    background-color: #e48a01;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .button:hover {
+    background-color: #ff7700;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0px;
+    animation: 1s ease 0s normal none pulsate;
+    opacity: 1;
+  }
+  
+  .error-text {
+    color: red;
+    margin-top: -1px;
+  }
+  
+  @media (max-width: 600px) {
+    .app {
+      width: 90%;
+      margin-inline: auto;
+      margin-top: 20vh;
+      padding: 15px;
+    }
+  
+    .text {
+      position: relative;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+  
+    input,
+    .button {
+      font-size: 0.9rem;
+    }
+  }
+  
