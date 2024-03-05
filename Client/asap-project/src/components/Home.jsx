@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import './Home.css';
 import logo from '../assets/logo.png';
 import axios from 'axios';
+import { Link } from "react-router-dom";
 
 function Home() {
   const [players, setPlayers] = useState([]);
@@ -31,6 +32,9 @@ function Home() {
             type="text"
             placeholder="       Search Players"
           />
+        </div>
+        <div>
+          <Link to="/insert">Insert Player</Link>
         </div>
         <div>
           <a href="">About</a>

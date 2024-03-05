@@ -56,4 +56,15 @@ app.get('/players',async(req,res)=>{
     }
 })
 
+app.post('/add', async (req, res) => {
+    try {
+        const newData = userModel.create(req.body) ;
+        res.send(newUser);
+    } catch (error) {
+        console.error(error);
+        res.send('Error');
+    }
+});
+
 module.exports = app
+
