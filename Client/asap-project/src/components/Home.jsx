@@ -3,15 +3,18 @@ import './Home.css';
 import logo from '../assets/logo.png';
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import bgIMG from '../assets/CampNou.jpg'
 
 function Home() {
   const [players, setPlayers] = useState([]);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get('https://calf-kings.onrender.com/players');
         setPlayers(response.data);
+        console.log(response.data)
       } catch (error) {
         console.error(error);
       }
@@ -20,8 +23,27 @@ function Home() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const showSuccess = sessionStorage.getItem("registrationSuccess");
+    if (showSuccess) {
+      setShowSuccessMessage(true);
+      setTimeout(() => {
+        setShowSuccessMessage(false);
+        sessionStorage.removeItem("registrationSuccess");
+      }, 3000);
+    }
+  }, []);
+
   return (
-    <div className="main">
+    <div>
+      <div className="bg">
+        <img src={bgIMG} alt="" className="bgIMG"/>
+      </div>
+      {showSuccessMessage && (
+        <div className="success-message">
+          Player Added ✅
+        </div>
+      )}
       <nav>
         <div>
           <img className="logo" src={logo} alt="" /> 
@@ -37,7 +59,7 @@ function Home() {
           <Link to="/insert">Insert Player</Link>
         </div>
         <div>
-          <a href="">About</a>
+          <a href="https://github.com/SahilK1720">About</a>
         </div>
       </nav>
 
@@ -45,7 +67,7 @@ function Home() {
         {players.map(player => (
           <div className="card" key={player.name}>
             <div className="card-image">
-              <img src={player.img_url} alt={player.name} />
+              <img src={player.img_url} alt={player.img_url} />
             </div>
             <div className="card-text">
               <div className="details">

@@ -1,4 +1,4 @@
-body {
+/* body {
     background-color: rgb(255, 236, 201);
     background-image: url("../assets/CampNou.jpg");
     background-position: center;
@@ -6,7 +6,7 @@ body {
     background-size: cover;
     min-height: 88vh;
     width: 100%;
-  }
+  } */
   
   .form-container {
     font-family: 'DM Serif Display', serif;
@@ -77,7 +77,7 @@ body {
     opacity: 1;
   }
   
-  .error-text {
+  .error {
     color: red;
     margin-top: -1px;
   }

@@ -58,8 +58,8 @@ app.get('/players',async(req,res)=>{
 
 app.post('/add', async (req, res) => {
     try {
-        const newData = userModel.create(req.body) ;
-        res.send(newUser);
+        const newData = userModel.create(req.body);
+        res.send(newData);
     } catch (error) {
         console.error(error);
         res.send('Error');
@@ -67,4 +67,3 @@ app.post('/add', async (req, res) => {
 });
 
 module.exports = app
-
