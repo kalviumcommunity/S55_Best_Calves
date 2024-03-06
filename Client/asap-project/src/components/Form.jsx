@@ -1,72 +1,67 @@
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import "./Form.css";
+import bgIMG from '../assets/CampNou.jpg'
 
 function Form() {
-  const [formData, setFormData] = useState({
-    name: "",
-    age: "",
-    calf_ratings: "",
-    height: "",
-    img_url: "",
-  });
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(formData)
-    try {
-      await axios.post("https://calf-kings.onrender.com/add", formData);
-    } catch (error) {
-      console.error(error);
-    }
+  const onSubmit = async (formData) => {
+    axios.post("https://calf-kings.onrender.com/add", formData)
+      .then(() => {
+        sessionStorage.setItem("registrationSuccess", "true");
+        navigate("/");
+        console.log(formData)
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
     <div className="form-container">
-      <form className="form" onSubmit={handleSubmit}>
+      <div className="bg">
+        <img src={bgIMG} alt="" className="bgIMG"/>
+      </div>
+      <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <label>Name:</label>
         <input
           type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
+          {...register("name", { required: true })}
         />
+        {errors.name && <p className="error">Name is required</p>}
+
         <label>Age:</label>
         <input
           type="number"
-          name="age"
-          value={formData.age}
-          onChange={handleChange}
+          {...register("age", { required: true })}
         />
+        {errors.age && <p className="error">Age is required</p>}
+
         <label>Calf Ratings:</label>
         <input
           type="number"
-          name="calf_ratings"
-          value={formData.calf_ratings}
-          onChange={handleChange}
+          {...register("calf_ratings", { required: true, min: 1, max: 10 })}
         />
+        {errors.calf_ratings && <p className="error">Calf Ratings must be between 1 and 10</p>}
+
         <label>Height:</label>
         <input
           type="text"
-          name="height"
-          value={formData.height}
-          onChange={handleChange}
+          {...register("height", { required: true })}
         />
+        {errors.height && <p className="error">Height is required</p>}
+
         <label>Image URL:</label>
         <input
           type="text"
-          name="img_url"
-          value={formData.img_url}
-          onChange={handleChange}
+          {...register("img_url", { required: true, pattern: /^https?:\/\/.+/ })}
         />
+        {errors.img_url && <p className="error">Valid url starts with "http://" or "https://"</p>}
+
         <button type="submit" className="button">
           Submit
         </button>
