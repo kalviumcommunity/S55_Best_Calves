@@ -6,16 +6,6 @@ const Joi = require('joi');
 
 app.use(express.json());
 
-// Define Joi schema for POST /add route
-const addSchema = Joi.object({
-    name: Joi.string().required(),
-    age: Joi.number().required(),
-    calf_ratings: Joi.number().min(0).max(10).required(),
-    height: Joi.number().required(),
-    img_url: Joi.string().required()
-});
-
-// Define Joi schema for PUT /updateCard/:id route
 const updateSchema = Joi.object({
     name: Joi.string().required(),
     age: Joi.number().required(),
@@ -33,7 +23,7 @@ app.get('/', async (req, res) => {
 // POST request to add a new user
 app.post('/add', async (req, res) => {
     try {
-        const { error, value } = addSchema.validate(req.body);
+        const { error, value } = updateSchema.validate(req.body);
         if (error) {
             return res.status(400).send(error.details[0].message);
         }
