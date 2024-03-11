@@ -80,18 +80,18 @@ app.delete('/delete/:id', async(req,res) => {
     .catch(err => console.log(err))
 })
 
-app.put(`/updateCard/:id`, async (req, res) => {
-    const _id = req.params.id;
-    try {
-        const updatedUser = await userModel.findByIdAndUpdate(_id, req.body, { new: true, runValidators: true });
-        if (!updatedUser) {
-            return res.status(404).send();
-        }
-        res.json(updatedUser);
-    } catch (err) {
-        res.status(400).json(err);
-    }
-});
+app.put(`/updateCard/:id`, async(req,res) => {
+    const _id = req.params.id
+    userModel.findByIdAndUpdate({_id : _id},{
+        name : req.body.name,
+        age : req.body.age,
+        calf_ratings : req.body.calf_ratings,
+        height : req.body.height,
+        img_url : req.body.img_url
+    })
+    .then(users => res.json(users))
+    .catch(err => res.json(err))
+})
 
 
 module.exports = app
