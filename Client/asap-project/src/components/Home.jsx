@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import './Home.css';
-import logo from '../assets/logo.png';
-import axios from 'axios';
+import "./Home.css";
+import logo from "../assets/logo.png";
+import axios from "axios";
 import { Link } from "react-router-dom";
-import bgIMG from '../assets/CampNou.jpg'
+import bgIMG from "../assets/CampNou.jpg";
 
 function Home() {
   const [players, setPlayers] = useState([]);
@@ -12,9 +12,11 @@ function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://calf-kings.onrender.com/players');
+        const response = await axios.get(
+          "https://calf-kings.onrender.com/players"
+        );
         setPlayers(response.data);
-        console.log(response.data)
+        console.log(response.data);
       } catch (error) {
         console.error(error);
       }
@@ -34,19 +36,29 @@ function Home() {
     }
   }, []);
 
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`https://calf-kings.onrender.com/delete/${id}`);
+      const response = await axios.get(
+        "https://calf-kings.onrender.com/players"
+      );
+      setPlayers(response.data);
+    } catch (error) {
+      console.error("Error deleting data:", error);
+    }
+  };
+
   return (
     <div>
       <div className="bg">
-        <img src={bgIMG} alt="" className="bgIMG"/>
+        <img src={bgIMG} alt="" className="bgIMG" />
       </div>
       {showSuccessMessage && (
-        <div className="success-message">
-          Player Added ✅
-        </div>
+        <div className="success-message">Player Added ✅</div>
       )}
       <nav>
         <div>
-          <img className="logo" src={logo} alt="" /> 
+          <img className="logo" src={logo} alt="" />
         </div>
         <div>
           <input
@@ -64,7 +76,7 @@ function Home() {
       </nav>
 
       <div className="container flex">
-        {players.map(player => (
+        {players.map((player) => (
           <div className="card" key={player.name}>
             <div className="card-image">
               <img src={player.img_url} alt={player.img_url} />
@@ -73,7 +85,7 @@ function Home() {
               <div className="details">
                 <div className="name">
                   <h3>{player.name}</h3>
-                  <h5 className="height">{player.height}</h5>
+                  <h5 className="height">{player.height} cm</h5>
                 </div>
                 <div className="age">
                   <h4>{player.age} yrs</h4>
@@ -85,12 +97,17 @@ function Home() {
               </div>
               <div className="actions">
                 <div>
-                  <Link to="/update">
-                    <button className="update" >Update</button>
+                  <Link to={`/update/${player._id}`}>
+                    <button className="update">Update</button>
                   </Link>
                 </div>
                 <div>
-                  <button className="delete">Delete</button>
+                  <button
+                    className="delete"
+                    onClick={() => handleDelete(player._id)}
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             </div>
