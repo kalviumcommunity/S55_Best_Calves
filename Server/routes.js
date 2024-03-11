@@ -68,21 +68,21 @@ app.post('/add', async (req, res) => {
 
 app.get('/players/:id', async (req,res) => {
     const _id = req.params.id
-    Model.findById({_id})
+    userModel.findById({_id})
     .then(users => res.json(users))
     .catch(err => console.log(err))
 })
 
 app.delete('/delete/:id', async(req,res) => {
     const _id = req.params.id
-    Model.findByIdAndDelete({_id:_id})
+    userModel.findByIdAndDelete({_id:_id})
     .then(res => res.json(res))
     .catch(err => console.log(err))
 })
 
 app.put(`/updateCard/:id`, async(req,res) => {
     const _id = req.params.id
-    Model.findByIdAndUpdate({_id : _id},{
+    userModel.findByIdAndUpdate({_id : _id},{
         name : req.body.name,
         age : req.body.age,
         calf_ratings : req.body.calf_ratings,
