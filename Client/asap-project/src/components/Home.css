@@ -170,6 +170,10 @@ h3{
     border-radius: 7px;
 }
 
+.delete:hover{
+    cursor: pointer;
+}
+
 .update{
     margin-top: 10px;
     background-color: rgb(19, 199, 19);
@@ -183,5 +187,7 @@ h3{
     border-radius: 7px;
 }
 
-
+.update:hover{
+    cursor: pointer;
+}
 

@@ -13,6 +13,7 @@ function Update() {
         axios.get(`https://calf-kings.onrender.com/players/` + id)
             .then(res => {
                 const playerData = res.data;
+                console.log(res.data)
                 setValue('name', playerData.name);
                 setValue('age', playerData.age);
                 setValue('calf_ratings', playerData.calf_ratings);
@@ -26,6 +27,7 @@ function Update() {
         axios.put(`https://calf-kings.onrender.com/updateCard/` + id, formData)
             .then(() => {
                 navigate("/"); 
+                console.log(formData)
             })
             .catch(error => {
                 console.error(error);
