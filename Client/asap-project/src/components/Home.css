@@ -48,6 +48,23 @@ img {
   box-shadow: 0 6px 8px 0 rgb(37, 1, 53);
 }
 
+.insertPlayer{
+    font-family: 'DM Serif Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    background-color: transparent;
+    color: #004D98;
+    padding: 0.6vw;
+    border: transparent;
+    border-radius: 7px;
+    box-shadow: 0px 0px 9px #017a8a;
+}
+
+.insertPlayer:hover{
+    box-shadow: 1px 1px 8px #474747;
+    transform: scale(0.98);
+}
+
 .flex{
     display: flex;
     justify-content: center;
@@ -159,7 +176,7 @@ h3{
 
 .delete{
     margin-top: 10px;
-    background-color: rgb(243,53,60);
+    background-color:  #A50044;
     width: auto; 
     padding: 10px 20px; 
     color: white;
@@ -168,15 +185,17 @@ h3{
     letter-spacing: 1.3px;
     border: none;
     border-radius: 7px;
+    box-shadow: 1.2px 1.2px 5px rgb(136, 136, 136);
 }
 
 .delete:hover{
     cursor: pointer;
+    animation: 1s ease 0s normal none pulsate;
 }
 
 .update{
     margin-top: 10px;
-    background-color: rgb(19, 199, 19);
+    background-color: #004D98;
     width: auto; 
     padding: 10px 20px; 
     color: white;
@@ -185,9 +204,34 @@ h3{
     letter-spacing: 1.3px;
     border: none;
     border-radius: 7px;
+    box-shadow: 1.2px 1.2px 5px rgb(136, 136, 136);
 }
 
 .update:hover{
     cursor: pointer;
+    animation: 1s ease 0s normal none pulsate;
 }
 
+@keyframes pulsate{
+    0% {
+      transform: scale(1);
+      transform-origin: center center;
+      animation-timing-function: ease-out;
+    }
+    10% {
+      transform: scale(0.91);
+      animation-timing-function: ease-in;
+    }
+    17% {
+      transform: scale(0.98);
+      animation-timing-function: ease-out;
+    }
+    33% {
+      transform: scale(0.87);
+      animation-timing-function: ease-in;
+    }
+    45% {
+      transform: scale(1);
+      animation-timing-function: ease-out;
+    }
+  }

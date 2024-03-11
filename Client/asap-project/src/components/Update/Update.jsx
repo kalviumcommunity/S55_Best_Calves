@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import './Update.css'
 
 function Update() {
     const { register, handleSubmit, setValue, formState: { errors } } = useForm();
