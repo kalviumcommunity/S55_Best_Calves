@@ -8,6 +8,7 @@ import bgIMG from "../assets/CampNou.jpg";
 function Home() {
   const [players, setPlayers] = useState([]);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [searchInput, setSearchInput] = useState(""); // Step 1
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,6 +49,10 @@ function Home() {
     }
   };
 
+  const filteredPlayers = players.filter(player =>
+    player.name.toLowerCase().includes(searchInput.toLowerCase())
+  );
+
   return (
     <div>
       <div className="bg">
@@ -64,11 +69,13 @@ function Home() {
           <input
             className="input"
             type="text"
-            placeholder="       Search Players"
+            placeholder="Search Players"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
           />
         </div>
         <div>
-          <Link to="/insert">Insert Player</Link>
+          <Link to="/insert"><button className="insertPlayer">Insert Player</button></Link>
         </div>
         <div>
           <a href="https://github.com/SahilK1720">About</a>
@@ -76,10 +83,10 @@ function Home() {
       </nav>
 
       <div className="container flex">
-        {players.map((player) => (
+        {filteredPlayers.map((player) => (
           <div className="card" key={player.name}>
             <div className="card-image">
-              <img src={player.img_url} alt={player.img_url} />
+              <img src={player.img_url} alt={player.name} />
             </div>
             <div className="card-text">
               <div className="details">

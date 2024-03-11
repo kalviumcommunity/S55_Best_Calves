@@ -48,7 +48,7 @@ function Form() {
         />
         {errors.calf_ratings && <p className="error">Calf Ratings must be between 1 and 10</p>}
 
-        <label>Height:</label>
+        <label>Height(cms):</label>
         <input
           type="text"
           {...register("height", { required: true })}

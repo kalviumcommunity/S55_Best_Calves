@@ -1,0 +1,9 @@
+body{
+    background-image: url('../../assets/CampNou.jpg');
+    background-color: rgb(255, 236, 201);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 88vh;
+    width: 100%;
+}
