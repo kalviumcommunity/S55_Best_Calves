@@ -83,6 +83,16 @@ function Home() {
               <div>
                 <h3>Calf Rating: {player.calf_ratings}</h3>
               </div>
+              <div className="actions">
+                <div>
+                  <Link to="/update">
+                    <button className="update" >Update</button>
+                  </Link>
+                </div>
+                <div>
+                  <button className="delete">Delete</button>
+                </div>
+              </div>
             </div>
           </div>
         ))}
