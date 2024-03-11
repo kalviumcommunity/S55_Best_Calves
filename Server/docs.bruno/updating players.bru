@@ -1,0 +1,25 @@
+meta {
+  name: updating players
+  type: http
+  seq: 10
+}
+
+put {
+  url: http://localhost:3000//updateCard/:id
+  body: json
+  auth: none
+}
+
+query {
+  : 
+}
+
+body:json {
+  {
+    "name": "Clarence Seedorf",
+    "age": 47,
+    "calf_ratings": 8,
+    "height": 177,
+    "img_url": "https://img.hotimg.com/Clarence.jpeg"
+  }
+}

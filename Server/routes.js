@@ -1,96 +1,105 @@
 const express = require('express');
-const app = express.Router()
-const {getConnectionStatus}=require('./db')
-const {userModel} = require('./schema')
+const app = express.Router();
+const { getConnectionStatus } = require('./db');
+const { userModel } = require('./schema');
+const Joi = require('joi');
 
 app.use(express.json());
 
-app.get('/',  async (req, res) => {
-    const connectionStatus = await getConnectionStatus()
-    res.send(connectionStatus)
- });
-
-app.get('/ping', (req, res) => {
-    res.send('Hello');
+// Define Joi schema for POST /add route
+const addSchema = Joi.object({
+    name: Joi.string().required(),
+    age: Joi.number().required(),
+    calf_ratings: Joi.number().min(0).max(10).required(),
+    height: Joi.number().required(),
+    img_url: Joi.string().required()
 });
 
-app.get("/get", (req, res, next) => {
-    try {
-        res.send("Get request on home page");
-    } catch (error) {
-        next(error); 
-    }
+// Define Joi schema for PUT /updateCard/:id route
+const updateSchema = Joi.object({
+    name: Joi.string().required(),
+    age: Joi.number().required(),
+    calf_ratings: Joi.number().min(0).max(10).required(),
+    height: Joi.number().required(),
+    img_url: Joi.string().required()
 });
 
-app.post("/post", (req, res, next) => {
-    try {
-        res.send("Post request");
-    } catch (error) {
-        next(error);
-    }
+// GET request to get connection status
+app.get('/', async (req, res) => {
+    const connectionStatus = await getConnectionStatus();
+    res.send(connectionStatus);
 });
 
-app.patch("/patch", (req, res, next) => {
-    try {
-        res.send("Patch request");
-    } catch (error) {
-        next(error);
-    }
-});
-
-app.delete("/delete", (req, res, next) => {
-    try {
-        res.send("Delete requeste");
-    } catch (error) {
-        next(error);
-    }
-});
-
-
-app.get('/players',async(req,res)=>{
-    try{
-        const test = await userModel.find()
-        res.json(test)
-    }catch(err){
-        console.log(err)
-    }
-})
-
+// POST request to add a new user
 app.post('/add', async (req, res) => {
     try {
-        const newData = userModel.create(req.body);
+        const { error, value } = addSchema.validate(req.body);
+        if (error) {
+            return res.status(400).send(error.details[0].message);
+        }
+        const newData = await userModel.create(req.body);
         res.send(newData);
     } catch (error) {
         console.error(error);
-        res.send('Error');
+        res.status(500).send('Error');
     }
 });
 
-app.get('/players/:id', async (req,res) => {
-    const _id = req.params.id
-    userModel.findById({_id})
-    .then(users => res.json(users))
-    .catch(err => console.log(err))
-})
+// PUT request to update user data by ID
+app.put(`/updateCard/:id`, async (req, res) => {
+    try {
+        const { error, value } = updateSchema.validate(req.body);
+        if (error) {
+            return res.status(400).send(error.details[0].message);
+        }
+        const _id = req.params.id;
+        const updatedUser = await userModel.findByIdAndUpdate(_id, req.body, { new: true });
+        res.json(updatedUser);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error');
+    }
+});
 
-app.delete('/delete/:id', async(req,res) => {
-    const _id = req.params.id
-    userModel.findByIdAndDelete({_id:_id})
-    .then(res => res.json(res))
-    .catch(err => console.log(err))
-})
+// DELETE request to delete user data by ID
+app.delete('/delete/:id', async (req, res) => {
+    try {
+        const _id = req.params.id;
+        const deletedUser = await userModel.findByIdAndDelete(_id);
+        if (!deletedUser) {
+            return res.status(404).send('User not found');
+        }
+        res.json(deletedUser);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error');
+    }
+});
 
-app.put(`/updateCard/:id`, async(req,res) => {
-    const _id = req.params.id
-    userModel.findByIdAndUpdate({_id : _id},{
-        name : req.body.name,
-        age : req.body.age,
-        calf_ratings : req.body.calf_ratings,
-        height : req.body.height,
-        img_url : req.body.img_url
-    })
-    .then(users => res.json(users))
-    .catch(err => res.json(err))
-})
+// GET request to get user data by ID
+app.get('/players/:id', async (req, res) => {
+    try {
+        const _id = req.params.id;
+        const user = await userModel.findById(_id);
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+        res.json(user);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error');
+    }
+});
 
-module.exports = app
+// GET request to get all users
+app.get('/players', async (req, res) => {
+    try {
+        const users = await userModel.find();
+        res.json(users);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error');
+    }
+});
+
+module.exports = app;
