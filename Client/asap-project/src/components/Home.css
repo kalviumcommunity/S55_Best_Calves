@@ -52,17 +52,34 @@ img {
     font-family: 'DM Serif Display', serif;
     font-size: 1rem;
     font-weight: 700;
-    background-color: transparent;
-    color: #004D98;
-    padding: 0.6vw;
+    background-color: #004D98;
+    color: #fefefe;
+    letter-spacing: 1px;
+    padding: 10px;
     border: transparent;
     border-radius: 7px;
-    box-shadow: 0px 0px 9px #017a8a;
 }
 
 .insertPlayer:hover{
-    box-shadow: 1px 1px 8px #474747;
+    background-color:  #02407f;
     transform: scale(0.98);
+}
+
+.logPlayer{
+  font-family: 'DM Serif Display', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  background-color: #A50044;
+  color: #fefefe;
+  letter-spacing: 1px;
+  padding: 10px;
+  border: transparent;
+  border-radius: 7px;
+}
+
+.logPlayer:hover{
+  background-color: #780032;
+  transform: scale(0.98);
 }
 
 .flex{
@@ -153,20 +170,23 @@ h3{
     padding-bottom: 1.9vh;
 }
 
-.success-message{
-    background-color: rgb(238, 255, 238); 
-    position: absolute; 
-    margin-top: 22px;
-    margin-left: 10px;
-    padding-top: 19px;
-    height: 70px;
-    width: 270px;
-    font-size: 1.2rem;
-    color: rgb(6, 184, 6);
-    text-align: center;
-    font-weight: bolder;
-    border: 3.2px solid rgb(6, 210, 6);
-    box-shadow: 2px 8px 10px 0 rgb(37, 1, 53);
+.success-message {
+  background-color: rgb(238, 255, 238);
+  position: fixed; 
+  top: 20px; 
+  left: 20px; 
+  padding: 20px;
+  min-height: 50px; 
+  width: calc(100% - 40px);
+  max-width: 270px;
+  font-size: 1.2rem; 
+  color: rgb(6, 184, 6);
+  text-align: center;
+  font-weight: bolder;
+  border: 3.2px solid rgb(6, 210, 6);
+  box-shadow: 2px 8px 10px 0 rgb(37, 1, 53);
+  z-index: 1000; 
+  box-sizing: border-box; 
 }
 
 .actions{
@@ -233,5 +253,13 @@ h3{
     45% {
       transform: scale(1);
       animation-timing-function: ease-out;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .success-message {
+      font-size: 0.9rem; 
+      padding: 8px;
+      width: calc(100% - 16px); 
     }
   }

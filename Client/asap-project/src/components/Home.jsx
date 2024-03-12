@@ -2,27 +2,28 @@ import React, { useEffect, useState } from "react";
 import "./Home.css";
 import logo from "../assets/logo.png";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import bgIMG from "../assets/CampNou.jpg";
 
 function Home() {
   const [players, setPlayers] = useState([]);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [searchInput, setSearchInput] = useState(""); // Step 1
+  const [showSignupSuccessMessage, setShowSignupSuccessMessage] = useState(false);
+  const [showLoginSuccessMessage, setShowLoginSuccessMessage] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "https://calf-kings.onrender.com/players"
-        );
+        const response = await axios.get("https://calf-kings.onrender.com/players");
         setPlayers(response.data);
         console.log(response.data);
       } catch (error) {
         console.error(error);
       }
     };
-
     fetchData();
   }, []);
 
@@ -35,21 +36,47 @@ function Home() {
         sessionStorage.removeItem("registrationSuccess");
       }, 3000);
     }
+
+    const signupSuccess = sessionStorage.getItem('signupSuccess');
+    if (signupSuccess) {
+      setShowSignupSuccessMessage(true);
+      setTimeout(() => {
+        setShowSignupSuccessMessage(false);
+        sessionStorage.removeItem('signupSuccess');
+      }, 3000);
+    }
+
+    const loginSuccess = sessionStorage.getItem('loginSuccess');
+    if (loginSuccess) {
+      setShowLoginSuccessMessage(true);
+      setTimeout(() => {
+        setShowLoginSuccessMessage(false);
+        sessionStorage.removeItem('loginSuccess');
+      }, 3000);
+    }
+
+
+    const loginStatus = sessionStorage.getItem("login");
+    setIsLoggedIn(loginStatus === "true");
   }, []);
 
   const handleDelete = async (id) => {
     try {
       await axios.delete(`https://calf-kings.onrender.com/delete/${id}`);
-      const response = await axios.get(
-        "https://calf-kings.onrender.com/players"
-      );
+      const response = await axios.get("https://calf-kings.onrender.com/players");
       setPlayers(response.data);
     } catch (error) {
       console.error("Error deleting data:", error);
     }
   };
 
-  const filteredPlayers = players.filter(player =>
+  const handleLogout = () => {
+    sessionStorage.removeItem("login");
+    setIsLoggedIn(false);
+    navigate("/"); 
+  };
+
+const filteredPlayers = players.filter(player =>
     player.name.toLowerCase().includes(searchInput.toLowerCase())
   );
 
@@ -58,9 +85,9 @@ function Home() {
       <div className="bg">
         <img src={bgIMG} alt="" className="bgIMG" />
       </div>
-      {showSuccessMessage && (
-        <div className="success-message">Player Added ✅</div>
-      )}
+      {showSuccessMessage && <div className="success-message">Player Added ✅</div>}
+      {showSignupSuccessMessage && <div className="success-message">Signup Successful ✅</div>}
+      {showLoginSuccessMessage && <div className="success-message">Login Successful ✅</div>}
       <nav>
         <div>
           <img className="logo" src={logo} alt="" />
@@ -74,12 +101,25 @@ function Home() {
             onChange={(e) => setSearchInput(e.target.value)}
           />
         </div>
-        <div>
-          <Link to="/insert"><button className="insertPlayer">Insert Player</button></Link>
-        </div>
-        <div>
-          <a href="https://github.com/SahilK1720">About</a>
-        </div>
+        {isLoggedIn && (
+          <div>
+            <Link to="/insert"><button className="insertPlayer">Insert Player</button></Link>
+          </div>
+        )}
+        {!isLoggedIn ? (
+          <>
+            <div>
+              <Link to="/signup"><button className="insertPlayer">Sign Up</button></Link>
+            </div>
+            <div>
+              <Link to="/login"><button className="logPlayer">Login</button></Link>
+            </div>
+          </>
+        ) : (
+          <div>
+            <button className="logPlayer" onClick={handleLogout}>Logout</button>
+          </div>
+        )}
       </nav>
 
       <div className="container flex">
@@ -103,19 +143,23 @@ function Home() {
                 <h3>Calf Rating: {player.calf_ratings}</h3>
               </div>
               <div className="actions">
-                <div>
-                  <Link to={`/update/${player._id}`}>
-                    <button className="update">Update</button>
-                  </Link>
-                </div>
-                <div>
-                  <button
-                    className="delete"
-                    onClick={() => handleDelete(player._id)}
-                  >
-                    Delete
-                  </button>
-                </div>
+                {isLoggedIn && (
+                  <>
+                    <div>
+                      <Link to={`/update/${player._id}`}>
+                        <button className="update">Update</button>
+                      </Link>
+                    </div>
+                    <div>
+                      <button
+                        className="delete"
+                        onClick={() => handleDelete(player._id)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>

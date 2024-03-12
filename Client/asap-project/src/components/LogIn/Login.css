@@ -1,0 +1,27 @@
+.error-message {
+    background-color: rgb(255, 238, 238);
+    position: fixed; 
+    top: 20px; 
+    left: 20px;
+    padding: 20px;
+    min-height: 50px;
+    width: calc(100% - 40px); 
+    max-width: 270px; 
+    font-size: 1.2rem; 
+    color: rgb(184, 6, 6);
+    text-align: center;
+    font-weight: bolder;
+    border: 3.2px solid rgb(210, 6, 6);
+    box-shadow: 2px 8px 10px 0 rgb(37, 1, 53);
+    z-index: 1000; 
+    box-sizing: border-box; 
+  }
+  
+  @media (max-width: 768px) {
+    .error-message {
+      font-size: 0.9rem; /* Adjust size for smaller screens */
+      padding: 8px;
+      width: calc(100% - 16px); /* Adjust for very small screens */
+    }
+  }
+  
