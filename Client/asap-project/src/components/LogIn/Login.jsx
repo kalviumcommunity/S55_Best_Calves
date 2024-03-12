@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import "./Login.css"
+import "./Login.css";
 
 function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
   const [loginMessage, setLoginMessage] = useState('');
-  const [messageType, setMessageType] = useState(''); 
+  const [messageType, setMessageType] = useState('');
 
   useEffect(() => {
     let timer;
@@ -21,6 +21,16 @@ function Login() {
     return () => clearTimeout(timer); 
   }, [loginMessage]);
 
+  const setCookie = (name, value, days) => {
+    let expires = "";
+    if (days) {
+      const date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+  };
+
   const onSubmit = async (data) => {
     const { username, password } = data;
     try {
@@ -32,8 +42,10 @@ function Login() {
 
       const response = await axios.post(`https://calf-kings.onrender.com/login`, { username, password });
       if (response.status === 200) {
-        sessionStorage.setItem('login', true);
+        setCookie('username', username, 365);
+        setCookie('password', password, 365);
         sessionStorage.setItem('loginSuccess', 'Login successful');
+        sessionStorage.setItem('login', true);
         navigate("/");
       } else {
         setLoginMessage('Invalid Credentials');
@@ -62,12 +74,12 @@ function Login() {
           })}
         />
         {errors.password && <p className="error">{errors.password.message}</p>}
-        {loginMessage && <div className="error-message">{loginMessage}</div>}
+        {loginMessage && <div className={`message ${messageType === 'error' ? 'error-message' : ''}`}>{loginMessage}</div>}
 
         <button type="submit" className="button">LOGIN</button>
         <p className='option'>
           Not a user?
-          <span className='option2'><Link to="/login">Sign Up</Link></span>
+          <span className='option2'><Link to="/signup">Sign Up</Link></span>
         </p>
       </form>
     </div>
