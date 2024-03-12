@@ -89,37 +89,41 @@ const filteredPlayers = players.filter(player =>
       {showSignupSuccessMessage && <div className="success-message">Signup Successful ✅</div>}
       {showLoginSuccessMessage && <div className="success-message">Login Successful ✅</div>}
       <nav>
-        <div>
-          <img className="logo" src={logo} alt="" />
-        </div>
-        <div>
-          <input
-            className="input"
-            type="text"
-            placeholder="Search Players"
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-          />
-        </div>
-        {isLoggedIn && (
+        <div className="firsthalf">
           <div>
-            <Link to="/insert"><button className="insertPlayer">Insert Player</button></Link>
+            <img className="logo" src={logo} alt="" />
           </div>
-        )}
-        {!isLoggedIn ? (
-          <>
-            <div>
-              <Link to="/signup"><button className="insertPlayer">Sign Up</button></Link>
-            </div>
-            <div>
-              <Link to="/login"><button className="logPlayer">Login</button></Link>
-            </div>
-          </>
-        ) : (
           <div>
-            <button className="logPlayer" onClick={handleLogout}>Logout</button>
+            <input
+              className="input"
+              type="text"
+              placeholder="Search Players"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+            />
           </div>
-        )}
+        </div>
+        <div className="secondhalf">
+          {isLoggedIn && (
+            <div>
+              <Link to="/insert"><button className="insertPlayer">Insert Player</button></Link>
+            </div>
+          )}
+          {!isLoggedIn ? (
+            <>
+              <div>
+                <Link to="/signup"><button className="insertPlayer">Sign Up</button></Link>
+              </div>
+              <div>
+                <Link to="/login"><button className="logPlayer">Login</button></Link>
+              </div>
+            </>
+          ) : (
+            <div>
+              <button className="logPlayer" onClick={handleLogout}>Logout</button>
+            </div>
+          )}
+        </div>
       </nav>
 
       <div className="container flex">
