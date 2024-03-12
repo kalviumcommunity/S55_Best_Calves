@@ -8,7 +8,6 @@ function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
   const [loginMessage, setLoginMessage] = useState('');
-  const [messageType, setMessageType] = useState('');
 
   useEffect(() => {
     let timer;
@@ -74,7 +73,7 @@ function Login() {
           })}
         />
         {errors.password && <p className="error">{errors.password.message}</p>}
-        {loginMessage && <div className={`message ${messageType === 'error' ? 'error-message' : ''}`}>{loginMessage}</div>}
+        {loginMessage && <div className="error-message">{loginMessage}</div>}
 
         <button type="submit" className="button">LOGIN</button>
         <p className='option'>
