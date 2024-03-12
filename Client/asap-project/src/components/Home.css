@@ -17,6 +17,7 @@ nav{
   width: auto;
   display: flex;
   justify-content: space-between;
+  row-gap: 10px;
   align-items: center;
   flex-wrap: wrap;
   box-shadow: 0 10px 14px 0 rgb(82, 94, 99);
@@ -38,7 +39,7 @@ img {
   font-family: 'DM Serif Display', serif;
   background-color: rgb(255, 255, 255);
   flex-grow: 1; 
-  width: 43vw;
+  width: 47vw;
   height: 45px; 
   margin: 0 10px;
   padding: 10px; 
@@ -86,6 +87,16 @@ img {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+}
+
+.firsthalf{
+  display: flex;
+  column-gap: 20px;
+}
+
+.secondhalf{
+  display: flex;
+  column-gap: 20px;
 }
 
 .container{
@@ -256,10 +267,48 @@ h3{
     }
   }
 
+
+
   @media (max-width: 768px) {
     .success-message {
       font-size: 0.9rem; 
       padding: 8px;
       width: calc(100% - 16px); 
     }
+
+    img {
+      width: 120px; 
+      height: 40px; 
+    }
+
+    .firsthalf{
+      display: flex;
+      flex-direction: column;
+    }
+
+    .secondhalf{
+      display: flex;
+      align-items: end;
+      flex-direction: column-reverse;
+      justify-content: center;
+      row-gap: 10px;
+    }
+
+    .input{
+      margin: 0;
+      width: 65vw;
+    }
+
+  }
+
+  @media (max-width: 1168px) {
+    .bgIMG{
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      object-fit: cover;
+  }
   }
