@@ -14,7 +14,8 @@ const updateSchema = Joi.object({
     age: Joi.number().required(),
     calf_ratings: Joi.number().min(0).max(10).required(),
     height: Joi.number().required(),
-    img_url: Joi.string().required()
+    img_url: Joi.string().required(),
+    created_by: Joi.string()
 });
 
 // GET request to get connection status

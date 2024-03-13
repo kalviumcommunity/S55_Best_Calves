@@ -5,7 +5,8 @@ const userSchema = mongoose.Schema({
     age: Number,
     calf_ratings: Number,
     height: String,
-    img_url: String
+    img_url: String,
+    created_by: String
 });
 const userModel = mongoose.model("calfkings-collections", userSchema);
 module.exports = {userModel};
