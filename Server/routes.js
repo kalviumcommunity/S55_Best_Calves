@@ -5,6 +5,8 @@ const { userModel } = require('./schema');
 const {loginModel} = require('./userSchema.js')
 const Joi = require('joi');
 
+const jwt = require('jsonwebtoken')
+
 app.use(express.json());
 
 const updateSchema = Joi.object({
@@ -12,7 +14,8 @@ const updateSchema = Joi.object({
     age: Joi.number().required(),
     calf_ratings: Joi.number().min(0).max(10).required(),
     height: Joi.number().required(),
-    img_url: Joi.string().required()
+    img_url: Joi.string().required(),
+    created_by: Joi.string()
 });
 
 // GET request to get connection status
@@ -130,5 +133,19 @@ app.post('/logout',(req,res)=>{
     res.status(200).json({message:'Logout succesful'})
 })
 
+app.post('/auth', async(req,res) => {
+    try{const {username,password} = req.body
+    const user = {
+        "username" : username,
+        "password" : password
+    }
+    const ACCESS_TOKEN = jwt.sign(user,process.env.ACCESS_TOKEN)
+    res.cookie('token',ACCESS_TOKEN,{maxAge:365*24*60*60*1000})
+    res.json({"acsessToken" : ACCESS_TOKEN})
+}catch(err){
+    console.error(err)
+    res.status(500).json({error:'Internal Server Error'})
+}
+});
 
 module.exports = app;
