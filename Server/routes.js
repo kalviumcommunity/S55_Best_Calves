@@ -4,9 +4,9 @@ const { getConnectionStatus } = require('./db');
 const { userModel } = require('./schema');
 const {loginModel} = require('./userSchema.js')
 const Joi = require('joi');
-
 const jwt = require('jsonwebtoken')
 
+require('dotenv').config()
 app.use(express.json());
 
 const updateSchema = Joi.object({
