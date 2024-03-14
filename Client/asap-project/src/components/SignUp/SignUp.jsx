@@ -20,6 +20,7 @@ function Signup() {
       if (response.status === 200) {
         sessionStorage.setItem('login', true);
         sessionStorage.setItem('signupSuccess', 'Signup successful'); 
+        sessionStorage.setItem('username', username);
         navigate("/");
       } else {
         setSignupError('Signup failed');

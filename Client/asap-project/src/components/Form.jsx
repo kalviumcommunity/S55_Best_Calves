@@ -10,11 +10,16 @@ function Form() {
   const navigate = useNavigate();
 
   const onSubmit = async (formData) => {
-    axios.post("https://calf-kings.onrender.com/add", formData)
+
+    const updatedFormData = {
+      ...formData,
+      created_by: sessionStorage.getItem('username') 
+    };
+
+    axios.post("https://calf-kings.onrender.com/add", updatedFormData)
       .then(() => {
         sessionStorage.setItem("registrationSuccess", "true");
         navigate("/");
-        console.log(formData)
       })
       .catch((error) => {
         console.error(error);

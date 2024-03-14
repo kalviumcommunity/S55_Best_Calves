@@ -17,7 +17,6 @@ export default function App() {
           <Route path="/update/:id" element={<Update/>}/>
           <Route path="/signup" element={<Signup/>}/>
           <Route path="/login" element={<Login/>}/>
-
       </Routes>
     </div>
   );
