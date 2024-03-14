@@ -20,7 +20,6 @@ function Form() {
       .then(() => {
         sessionStorage.setItem("registrationSuccess", "true");
         navigate("/");
-        console.log(updatedFormData)
       })
       .catch((error) => {
         console.error(error);

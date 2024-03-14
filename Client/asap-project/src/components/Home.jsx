@@ -8,8 +8,7 @@ import bgIMG from "../assets/CampNou.jpg";
 function Home() {
   const [players, setPlayers] = useState([]);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [showSignupSuccessMessage, setShowSignupSuccessMessage] =
-    useState(false);
+  const [showSignupSuccessMessage, setShowSignupSuccessMessage] = useState(false);
   const [showLoginSuccessMessage, setShowLoginSuccessMessage] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -32,8 +31,6 @@ function Home() {
           ),
         ];
         setUniqueUsers(users);
-
-        console.log(response.data);
       } catch (error) {
         console.error(error);
       }
